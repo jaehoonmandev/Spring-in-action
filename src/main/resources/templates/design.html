@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--Thymelaaf Name spacea 설정-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Skateboard parts Setup</title>
+
+    <!--정적인 리소스는 @{}로 경로를 선택해준다.-->
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+
+<body>
+<h1>Design your Skateboard!</h1>
+<!--이미지 호출-->
+<img th:src="@{/images/shop_banner.png}">
+
+<!--데이터를 서버로 보낼 form, 데이터 객체는 setup Entity로 핸들링-->
+<form method="POST" th:object="${setup}">
+
+    <span class="validationError" th:if="${#fields.hasErrors('parts')}" th:errors="*{parts}">셋업 에러</span>
+
+    <div class="grid">
+        <div class="parts-group" id="grip_tape">
+            <h3>그립 테입 :</h3>
+
+            <!--th:each로 List 따위로 담은 복수의 데이터를 순회한다. -->
+            <div th:each="part:${grip_tape}">
+                <input name="parts" type="checkbox" th:value="${part.id}">
+                <span th:text="${part.name}">Parts</span><br>
+            </div>
+        </div>
+
+        <div class="parts-group" id="deck">
+            <h3>데크 :</h3>
+
+            <div th:each="part : ${deck}">
+                <input name="parts" type="checkbox" th:value="${part.id}">
+                <span th:text="${part.name}">Parts</span><br>
+            </div>
+        </div>
+
+        <div class="parts-group" id="truck">
+            <h3>트럭 :</h3>
+
+            <div th:each="part : ${truck}">
+                <input name="parts" type="checkbox" th:value="${part.id}">
+                <span th:text="${part.name}">Parts</span><br>
+            </div>
+        </div>
+
+        <div class="parts-group" id="wheels">
+            <h3>휠 :</h3>
+
+            <div th:each="part : ${wheel}">
+                <input name="parts" type="checkbox" th:value="${part.id}">
+                <span th:text="${part.name}">setup</span><br>
+            </div>
+        </div>
+
+        <div class="parts-group" id="bearings">
+            <h3>베어링 :</h3>
+
+            <div th:each="part : ${bearing}">
+                <input name="parts" type="checkbox" th:value="${part.id}">
+                <span th:text="${part.name}">setup</span><br>
+            </div>
+        </div>
+
+        <div class="parts-group" id="hardwares">
+            <h3>하드웨어 :</h3>
+
+            <div th:each="part : ${hardware}">
+                <input name="parts" type="checkbox" th:value="${part.id}">
+                <span th:text="${part.name}">setup</span><br>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h3>셋업 이름 : </h3>
+        <input type="text" th:field="*{name}">
+        <span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">셋업 이름</span>
+        <br>
+        <button>셋업 요청하기.</button>
+    </div>
+</form>
+</body>
+</html>

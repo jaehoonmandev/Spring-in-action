@@ -2,6 +2,7 @@ package com.skateboard.data;
 
 import com.skateboard.DTO.Parts;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -31,6 +32,7 @@ public class JdbcPartsRepository implements PartsRepository{
         JdbcTemplate.query 메서드에 첫 번째 인자로 호출 할 쿼리문을 기입하고,
         두 번째 인자로 리턴 받을 ResultSet을 맵핑할 오브젝트를 지정한다.
         현재는 mapRowToParts 라는 메서드를 생성하여 Parts DTO에 맵핑 될 수 있게 지정하였다.
+        java8 에서의 메서드 참조와 lamda를 이용하여 mapRowToParts를 return하는게 간단하다.
         */
         return jdbc.query("select id, name, type from Parts",
                 this::mapRowToParts);
@@ -42,6 +44,7 @@ public class JdbcPartsRepository implements PartsRepository{
         findAll() 메서드에서 호출한 JdbcTemplate.query와 다르게
         JdbcTemplate.queryForObject를 호출한 이유는 findById는 ID값을 인자로 넘겨
         하나의 결과 값을 가져올 것이기 때문이다.
+        3번째 인재로 준 id는 실행될 쿼리문에 ?에 해당하는 위치에 참조된다.
         JdbcTemplate.query는 여러개의 값을 가져올 때 사용한다.
         */
         return jdbc.queryForObject(

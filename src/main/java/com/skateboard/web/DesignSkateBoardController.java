@@ -3,8 +3,10 @@ package com.skateboard.web;
 import com.skateboard.DTO.Parts;
 import com.skateboard.DTO.Parts.Type;
 import com.skateboard.DTO.Setup;
+import com.skateboard.data.JdbcPartsRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,13 +24,22 @@ import java.util.stream.Collectors;
 @RequestMapping("/design") // http://[localhost]/design mapping
 public class DesignSkateBoardController {
 
+    //Repository Injection
+    private final JdbcPartsRepository partsRepository;
+
+    @Autowired
+    public DesignSkateBoardController(JdbcPartsRepository partsRepository){
+        this.partsRepository = partsRepository;
+    }
+
+
     //GET으로 들어온 요청에 대한 처리
     @GetMapping
     //설정한 데이터를 form형태로 View로 보여준다.
     public String showDesignForm(Model model) {
         /*여러개의 BoardParts 객체를 초기화하여 ArrayList 형태로 여러개 set
         (ID,값, BoardParts의 Type 열거체 지정)*/
-        List<Parts> parts = Arrays.asList(
+        /*List<Parts> parts = Arrays.asList(
                 //GRIP_TAPE
                 new Parts("MOB_GRIP","MOB Grip tape", Type.GRIP_TAPE),
                 new Parts("GRZ_GRIP","Grizzly Grip tape", Type.GRIP_TAPE),
@@ -48,7 +60,10 @@ public class DesignSkateBoardController {
                 //HARDWARE
                 new Parts("BRO_HARDWARE_7_8","Bronze 56k 7/8\"",Type.HARDWARE),
                 new Parts("IND_HARDWARE_1","Independent 1\"",Type.HARDWARE)
-        );
+        );*/
+
+        List<Parts> parts = new ArrayList<>();
+        partsRepository.findAll().forEach(parts::add);
 
         Type[] types = Parts.Type.values(); // 3번째 인자로 준 구분 열거체의 값을 초기화.
         for (Type type : types) {

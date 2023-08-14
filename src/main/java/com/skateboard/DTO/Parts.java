@@ -9,12 +9,8 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class Parts {
 
-    //변수 선언.
-    private final String id;
-
-    //등록된 날 짜를 표시하기 위한 속성 추가.
-    private Date placedAt;
-
+    //변수 선언부.
+    private final String id; //id 추가
     private final String name;
     private final Type type;
 

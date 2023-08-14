@@ -14,6 +14,7 @@ public class Order {
 
     private Long id;
 
+    //등록된 날짜를 표시하기 위한 속성 추가.
     private Date createdAt;
 
     @NotBlank(message="배송지 이름을 입력해주세요.")

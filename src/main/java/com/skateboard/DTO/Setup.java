@@ -4,10 +4,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
 public class Setup {
+
+    private Long id;
+    //등록된 날짜를 표시하기 위한 속성 추가.
+    private Date createdAt;
 
     @NotBlank
     @Size(min=2, message = "2글자 이상 작성해주세요.")

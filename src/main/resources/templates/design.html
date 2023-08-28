@@ -27,7 +27,7 @@
             <!--th:each로 List 따위로 담은 복수의 데이터를 순회한다. -->
             <div th:each="part:${grip_tape}">
                 <input name="parts" type="checkbox" th:value="${part.id}">
-                <span th:text="${part.name}">Parts</span><br>
+                <span th:text="${part.name}">Part</span><br>
             </div>
         </div>
 
@@ -36,7 +36,7 @@
 
             <div th:each="part : ${deck}">
                 <input name="parts" type="checkbox" th:value="${part.id}">
-                <span th:text="${part.name}">Parts</span><br>
+                <span th:text="${part.name}">Part</span><br>
             </div>
         </div>
 
@@ -45,7 +45,7 @@
 
             <div th:each="part : ${truck}">
                 <input name="parts" type="checkbox" th:value="${part.id}">
-                <span th:text="${part.name}">Parts</span><br>
+                <span th:text="${part.name}">Part</span><br>
             </div>
         </div>
 

@@ -65,7 +65,7 @@
 			th:errors="*{ccNumber}">카드 번호.</span>
 		<br />
 
-		<label for="ccExpiration">만료일 (YY/MM): </label>
+		<label for="ccExpiration">만료일 (MM/YY): </label>
 		<input type="text" th:field="*{ccExpiration}" />
 		<span class="validationError"
 			th:if="${#fields.hasErrors('ccExpiration')}"
